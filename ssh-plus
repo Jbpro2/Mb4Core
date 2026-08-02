@@ -4,6 +4,7 @@
 VERDE='\e[32m'
 RESET='\e[0m'
 VERMELHO='\e[31m'
+CIANO='\e[36m'
 
 echo -e "${VERDE}Iniciando instalação do DTunnel Mod (Mb4Core)...${RESET}"
 
@@ -16,7 +17,7 @@ fi
 # Atualizar sistema
 apt update -y && apt upgrade -y
 
-# Instalar dependências básicas e Java para o APK
+# Instalar dependências básicas
 echo -e "${VERDE}Instalando dependências do sistema e Java...${RESET}"
 apt install -y curl git zip unzip wget screen build-essential libcap2-bin python3 python3-pip python3-bcrypt openjdk-17-jdk-headless
 
@@ -36,6 +37,29 @@ if ! command -v pm2 &> /dev/null; then
     npm install -g pm2
 fi
 
+# --- INSTALAÇÃO DO ANDROID SDK PARA GERAR APK ---
+echo -e "${VERDE}Configurando Android SDK para geração de APK...${RESET}"
+mkdir -p /opt/android-sdk/cmdline-tools
+cd /opt/android-sdk/cmdline-tools
+if [ ! -d "latest" ]; then
+    wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O tools.zip
+    unzip tools.zip
+    mv cmdline-tools latest
+    rm tools.zip
+fi
+
+export ANDROID_HOME=/opt/android-sdk
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+
+# Aceitar licenças
+yes | /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+# Criar local.properties no projeto
+mkdir -p /opt/Mb4Core
+echo "sdk.dir=/opt/android-sdk" > /opt/Mb4Core/local.properties
+
+# -----------------------------------------------
+
 # Limpar instalação anterior se existir
 rm -rf /opt/Mb4Core
 
@@ -46,7 +70,8 @@ git clone https://github.com/Jbpro2/Mb4Core.git /opt/Mb4Core
 # Entrar na pasta do projeto
 cd /opt/Mb4Core
 
-# Configurar permissão do gradlew para o APK
+# Configurar local.properties novamente após o clone
+echo "sdk.dir=/opt/android-sdk" > /opt/Mb4Core/local.properties
 chmod +x gradlew
 
 # Criar arquivo .env
@@ -110,7 +135,6 @@ cd /opt/Mb4Core && pm2 start ecosystem.config.js
 echo -e "${VERDE}Instalação concluída com sucesso!${RESET}"
 echo -e "Acesse pelo seu IP na porta 3000"
 echo -e "Admin padrão: ${VERDE}Bk2026@12${RESET} / Senha: ${VERDE}2012@bk2520${RESET}"
-echo -e "Opção 6 do menu habilitada para gerar o APK."
 echo ""
 echo -e "Use os comandos abaixo:"
 echo -e "- ${VERDE}menuop${RESET} : Abre o menu"

@@ -24,9 +24,9 @@
 <body>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
   <main class="d-flex">
-    <%~ include("../../views/sidebar", it) %>
+    <%~ include("./sidebar", it) %>
     <div class="container-fluid p-0">
-      <%~ include("../../views/header", it) %>
+      <%~ include("./header", it) %>
       
       <div class="content pt-3 px-4 overflow-auto">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -38,8 +38,8 @@
 
         <div class="card bg-dark text-white shadow border-secondary">
             <div class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">Usuários Cadastrados</h5>
-                <small class="text-muted">Total de usuários: <span id="user-count">0</span></small>
+                <h5 class="card-title mb-0 text-white">Usuários Cadastrados</h5>
+                <small class="text-muted">Total: <span id="user-count">0</span></small>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -105,7 +105,7 @@
             document.getElementById('user-count').textContent = users.length;
             tbody.innerHTML = '';
 
-            if (users.length === 0) {
+            if (!Array.isArray(users) || users.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="5" class="text-center">Nenhum usuário encontrado.</td></tr>';
                 return;
             }

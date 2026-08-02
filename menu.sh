@@ -81,10 +81,13 @@ gerar_apk() {
     
     cd "$PROJETO_DIR"
     
-    # Garantir que o Java está instalado
-    if ! command -v java &> /dev/null; then
-        echo -e "${VERMELHO}Java não encontrado! Instalando...${RESET}"
-        apt update && apt install -y openjdk-17-jdk-headless
+    # Configurar variáveis de ambiente para o Gradle
+    export ANDROID_HOME=/opt/android-sdk
+    export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+    
+    if [ ! -d "/opt/android-sdk" ]; then
+        echo -e "${VERMELHO}Android SDK não encontrado! Rodando instalador de dependências...${RESET}"
+        bash /opt/Mb4Core/ssh-plus
     fi
 
     chmod +x gradlew
@@ -100,7 +103,7 @@ gerar_apk() {
             echo -e "${VERMELHO}Erro: APK não encontrado após a compilação.${RESET}"
         fi
     else
-        echo -e "${VERMELHO}Erro ao compilar o APK. Verifique se o servidor tem memória suficiente.${RESET}"
+        echo -e "${VERMELHO}Erro ao compilar o APK. Verifique a memória do servidor.${RESET}"
     fi
     sleep 3
 }
