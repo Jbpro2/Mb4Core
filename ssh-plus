@@ -3,60 +3,89 @@
 # Cores
 VERDE='\e[32m'
 RESET='\e[0m'
+VERMELHO='\e[31m'
 
-echo -e "${VERDE}Iniciando instalação do DTunnel Mod...${RESET}"
+echo -e "${VERDE}Iniciando instalação do DTunnel Mod (Mb4Core)...${RESET}"
+
+# Verificar se é root
+if [ "$EUID" -ne 0 ]; then 
+  echo -e "${VERMELHO}Por favor, execute como root (sudo su).${RESET}"
+  exit
+fi
 
 # Atualizar sistema
 apt update -y && apt upgrade -y
 
 # Instalar dependências básicas
-apt install -y curl git zip unzip wget screen
+apt install -y curl git zip unzip wget screen build-essential
 
 # Instalar Node.js 20
-curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt install -y nodejs
+if ! command -v node &> /dev/null; then
+    echo -e "${VERDE}Instalando Node.js...${RESET}"
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    apt install -y nodejs
+fi
 
 # Instalar PM2 globalmente
-npm install -g pm2
+if ! command -v pm2 &> /dev/null; then
+    echo -e "${VERDE}Instalando PM2...${RESET}"
+    npm install -g pm2
+fi
 
-# Entrar na pasta do projeto (assumindo que o script é baixado na raiz ou movido)
-cd "$(dirname "$0")"
+# Limpar instalação anterior se existir
+rm -rf /opt/Mb4Core
+
+# Clonar o repositório
+echo -e "${VERDE}Baixando arquivos do projeto...${RESET}"
+git clone https://github.com/Jbpro2/Mb4Core.git /opt/Mb4Core
+
+# Entrar na pasta do projeto
+cd /opt/Mb4Core
 
 # Instalar dependências do projeto
+echo -e "${VERDE}Instalando dependências do Node.js...${RESET}"
 npm install
 
 # Build do projeto
+echo -e "${VERDE}Compilando o projeto...${RESET}"
 npm run build
 
-# Configurar atalhos
-echo "alias menuop='bash /home/ubuntu/Mb4Core/menu.sh'" >> ~/.bashrc
-echo "alias pon='pm2 start /home/ubuntu/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
-echo "alias poff='pm2 stop /home/ubuntu/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
+# Configurar atalhos no .bashrc para persistência
+sed -i '/menuop/d' ~/.bashrc
+sed -i '/pon/d' ~/.bashrc
+sed -i '/poff/d' ~/.bashrc
 
-# Criar comandos globais
+echo "alias menuop='bash /opt/Mb4Core/menu.sh'" >> ~/.bashrc
+echo "alias pon='pm2 start /opt/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
+echo "alias poff='pm2 stop /opt/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
+
+# Criar comandos globais em /usr/local/bin para execução imediata
 cat <<EOF > /usr/local/bin/menuop
 #!/bin/bash
-bash /home/ubuntu/Mb4Core/menu.sh
+bash /opt/Mb4Core/menu.sh
 EOF
 
 cat <<EOF > /usr/local/bin/pon
 #!/bin/bash
-pm2 start /home/ubuntu/Mb4Core/ecosystem.config.js
+pm2 start /opt/Mb4Core/ecosystem.config.js
 EOF
 
 cat <<EOF > /usr/local/bin/poff
 #!/bin/bash
-pm2 stop /home/ubuntu/Mb4Core/ecosystem.config.js
+pm2 stop /opt/Mb4Core/ecosystem.config.js
 EOF
 
 chmod +x /usr/local/bin/menuop
 chmod +x /usr/local/bin/pon
 chmod +x /usr/local/bin/poff
 
-# Carregar novos aliases
-source ~/.bashrc
+echo -e "${VERDE}Instalação concluída com sucesso!${RESET}"
+echo -e "Admin padrão: ${VERDE}Bk2026@12${RESET} / Senha: ${VERDE}2012@bk2520${RESET}"
+echo ""
+echo -e "Use os comandos abaixo:"
+echo -e "- ${VERDE}menuop${RESET} : Abre o menu"
+echo -e "- ${VERDE}pon${RESET}    : Liga o painel"
+echo -e "- ${VERDE}poff${RESET}   : Desliga o painel"
 
-echo -e "${VERDE}Instalação concluída!${RESET}"
-echo -e "Use ${VERDE}menuop${RESET} para abrir o menu."
-echo -e "Use ${VERDE}pon${RESET} para ligar o painel."
-echo -e "Use ${VERDE}poff${RESET} para desligar o painel."
+# Tentar carregar os aliases na sessão atual
+export PATH="$PATH:/usr/local/bin"

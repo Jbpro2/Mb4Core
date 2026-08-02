@@ -8,7 +8,7 @@ VERMELHO='\e[31m'
 RESET='\e[0m'
 
 # Caminho do projeto
-PROJETO_DIR="/home/ubuntu/Mb4Core"
+PROJETO_DIR="/opt/Mb4Core"
 ENV_FILE="$PROJETO_DIR/.env"
 DB_FILE="$PROJETO_DIR/prisma/database.db"
 
@@ -47,7 +47,7 @@ restaurar_backup() {
 # Função para Reiniciar
 reiniciar_painel() {
     echo -e "\n${AMARELO}Reiniciando painel...${RESET}"
-    pm2 restart DTunnel || npm run prod
+    pm2 restart DTunnel || (cd $PROJETO_DIR && npm run prod)
     echo -e "${VERDE}Painel reiniciado!${RESET}"
     sleep 2
 }
