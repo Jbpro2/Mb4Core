@@ -15,7 +15,7 @@ DB_FILE="$PROJETO_DIR/prisma/database.db"
 # Função para ler a porta atual
 get_port() {
     if [ -f "$ENV_FILE" ]; then
-        PORT=$(grep "^PORT=" "$ENV_FILE" | cut -d'=' -f2)
+        PORT=$(grep "^PORT=" "$ENV_FILE" | cut -d'=' -f2 | tr -d '"' | tr -d "'")
         echo "${PORT:-3000}"
     else
         echo "3000"
@@ -61,11 +61,19 @@ configurar_porta() {
     read nova_porta
     if [[ "$nova_porta" =~ ^[0-9]+$ ]]; then
         if [ -f "$ENV_FILE" ]; then
-            # Remover porta antiga e adicionar a nova
-            sed -i '/^PORT=/d' "$ENV_FILE"
-            echo "PORT=$nova_porta" >> "$ENV_FILE"
+            # Usar sed para substituir apenas o valor de PORT, mantendo o resto do arquivo
+            if grep -q "^PORT=" "$ENV_FILE"; then
+                sed -i "s/^PORT=.*/PORT=$nova_porta/" "$ENV_FILE"
+            else
+                echo "PORT=$nova_porta" >> "$ENV_FILE"
+            fi
         else
             echo "PORT=$nova_porta" > "$ENV_FILE"
+            echo "NODE_ENV=\"production\"" >> "$ENV_FILE"
+            echo "DATABASE_URL=\"file:./database.db\"" >> "$ENV_FILE"
+            echo "CSRF_SECRET=\"$(openssl rand -hex 32)\"" >> "$ENV_FILE"
+            echo "JWT_SECRET_KEY=\"$(openssl rand -hex 32)\"" >> "$ENV_FILE"
+            echo "JWT_SECRET_REFRESH=\"$(openssl rand -hex 32)\"" >> "$ENV_FILE"
         fi
         echo -e "${VERDE}Porta alterada para $nova_porta.${RESET}"
         echo -e "${AMARELO}Reiniciando o painel para aplicar a alteração...${RESET}"

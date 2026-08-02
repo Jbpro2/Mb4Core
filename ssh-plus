@@ -17,7 +17,7 @@ fi
 apt update -y && apt upgrade -y
 
 # Instalar dependências básicas
-apt install -y curl git zip unzip wget screen build-essential
+apt install -y curl git zip unzip wget screen build-essential libcap2-bin
 
 # Instalar Node.js 20
 if ! command -v node &> /dev/null; then
@@ -45,24 +45,40 @@ git clone https://github.com/Jbpro2/Mb4Core.git /opt/Mb4Core
 # Entrar na pasta do projeto
 cd /opt/Mb4Core
 
+# Criar arquivo .env se não existir
+if [ ! -f .env ]; then
+    echo -e "${VERDE}Gerando chaves de segurança...${RESET}"
+    cat <<EOF > .env
+PORT=3000
+NODE_ENV="production"
+DATABASE_URL="file:./database.db"
+CSRF_SECRET="$(openssl rand -hex 32)"
+JWT_SECRET_KEY="$(openssl rand -hex 32)"
+JWT_SECRET_REFRESH="$(openssl rand -hex 32)"
+EOF
+fi
+
 # Instalar dependências do projeto
 echo -e "${VERDE}Instalando dependências do Node.js...${RESET}"
 npm install
+
+# Gerar Prisma Client
+npx prisma generate
 
 # Build do projeto
 echo -e "${VERDE}Compilando o projeto...${RESET}"
 npm run build
 
-# Configurar atalhos no .bashrc para persistência
+# Configurar atalhos
 sed -i '/menuop/d' ~/.bashrc
 sed -i '/pon/d' ~/.bashrc
 sed -i '/poff/d' ~/.bashrc
 
 echo "alias menuop='bash /opt/Mb4Core/menu.sh'" >> ~/.bashrc
-echo "alias pon='pm2 start /opt/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
-echo "alias poff='pm2 stop /opt/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
+echo "alias pon='cd /opt/Mb4Core && pm2 start ecosystem.config.js'" >> ~/.bashrc
+echo "alias poff='pm2 stop DTunnel'" >> ~/.bashrc
 
-# Criar comandos globais em /usr/local/bin para execução imediata
+# Criar comandos globais
 cat <<EOF > /usr/local/bin/menuop
 #!/bin/bash
 bash /opt/Mb4Core/menu.sh
@@ -70,12 +86,12 @@ EOF
 
 cat <<EOF > /usr/local/bin/pon
 #!/bin/bash
-pm2 start /opt/Mb4Core/ecosystem.config.js
+cd /opt/Mb4Core && pm2 start ecosystem.config.js
 EOF
 
 cat <<EOF > /usr/local/bin/poff
 #!/bin/bash
-pm2 stop /opt/Mb4Core/ecosystem.config.js
+pm2 stop DTunnel
 EOF
 
 chmod +x /usr/local/bin/menuop
@@ -89,6 +105,3 @@ echo -e "Use os comandos abaixo:"
 echo -e "- ${VERDE}menuop${RESET} : Abre o menu"
 echo -e "- ${VERDE}pon${RESET}    : Liga o painel"
 echo -e "- ${VERDE}poff${RESET}   : Desliga o painel"
-
-# Tentar carregar os aliases na sessão atual
-export PATH="$PATH:/usr/local/bin"
