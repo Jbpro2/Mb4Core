@@ -26,6 +26,9 @@ if ! command -v node &> /dev/null; then
     apt install -y nodejs
 fi
 
+# Dar permissão para o Node usar portas privilegiadas (80, 443)
+setcap 'cap_net_bind_service=+ep' $(which node)
+
 # Instalar PM2 globalmente
 if ! command -v pm2 &> /dev/null; then
     echo -e "${VERDE}Instalando PM2...${RESET}"

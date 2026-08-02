@@ -47,8 +47,11 @@ restaurar_backup() {
 # Função para Reiniciar
 reiniciar_painel() {
     echo -e "\n${AMARELO}Reiniciando painel...${RESET}"
-    pm2 restart DTunnel || (cd $PROJETO_DIR && npm run prod)
-    echo -e "${VERDE}Painel reiniciado!${RESET}"
+    cd "$PROJETO_DIR"
+    pm2 delete DTunnel 2>/dev/null
+    pm2 start ecosystem.config.js
+    pm2 save
+    echo -e "${VERDE}Painel reiniciado com sucesso!${RESET}"
     sleep 2
 }
 
@@ -58,15 +61,19 @@ configurar_porta() {
     read nova_porta
     if [[ "$nova_porta" =~ ^[0-9]+$ ]]; then
         if [ -f "$ENV_FILE" ]; then
-            sed -i "s/^PORT=.*/PORT=$nova_porta/" "$ENV_FILE"
+            # Remover porta antiga e adicionar a nova
+            sed -i '/^PORT=/d' "$ENV_FILE"
+            echo "PORT=$nova_porta" >> "$ENV_FILE"
         else
             echo "PORT=$nova_porta" > "$ENV_FILE"
         fi
-        echo -e "${VERDE}Porta alterada para $nova_porta. Reinicie o painel para aplicar.${RESET}"
+        echo -e "${VERDE}Porta alterada para $nova_porta.${RESET}"
+        echo -e "${AMARELO}Reiniciando o painel para aplicar a alteração...${RESET}"
+        reiniciar_painel
     else
         echo -e "${VERMELHO}Porta inválida!${RESET}"
+        sleep 2
     fi
-    sleep 2
 }
 
 # Menu Principal
