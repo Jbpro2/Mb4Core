@@ -12,9 +12,10 @@ PROJETO_DIR="/opt/Mb4Core"
 ENV_FILE="$PROJETO_DIR/.env"
 DB_FILE="$PROJETO_DIR/prisma/database.db"
 
-# Exportar variáveis do Android SDK
+# Exportar variáveis do Android SDK e NDK
 export ANDROID_HOME=/opt/android-sdk
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+export NDK_HOME=/opt/android-sdk/ndk/27.0.12077973
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$NDK_HOME
 
 # Função para ler a porta atual
 get_port() {
@@ -85,8 +86,8 @@ gerar_apk() {
     
     cd "$PROJETO_DIR"
     
-    if [ ! -d "/opt/android-sdk" ]; then
-        echo -e "${VERMELHO}Android SDK não encontrado! Reinstale usando o ssh-plus.${RESET}"
+    if [ ! -d "/opt/android-sdk/ndk/27.0.12077973" ]; then
+        echo -e "${VERMELHO}Android NDK não encontrado! Reinstale usando o ssh-plus.${RESET}"
         sleep 3
         return
     fi
@@ -104,7 +105,7 @@ gerar_apk() {
             echo -e "${VERMELHO}Erro: APK não encontrado após a compilação.${RESET}"
         fi
     else
-        echo -e "${VERMELHO}Erro ao compilar o APK. Verifique a memória do servidor.${RESET}"
+        echo -e "${VERMELHO}Erro ao compilar o APK. Verifique se o NDK está instalado corretamente.${RESET}"
     fi
     sleep 3
 }

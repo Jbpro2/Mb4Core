@@ -13,14 +13,14 @@ export const GenerateApk: RouteOptions = {
     const apkOutput = path.join(projectDir, 'app/build/outputs/apk/debug/app-debug.apk');
     const finalApk = path.join(projectDir, 'DTunnelMod.apk');
 
-    // Configurar variáveis de ambiente e compilar
-    const env = `export ANDROID_HOME=/opt/android-sdk && export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools`;
+    // Configurar variáveis de ambiente e compilar com suporte a NDK
+    const env = `export ANDROID_HOME=/opt/android-sdk && export NDK_HOME=/opt/android-sdk/ndk/27.0.12077973 && export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$NDK_HOME`;
     const command = `${env} && cd ${projectDir} && chmod +x gradlew && ./gradlew assembleDebug`;
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error(`Erro ao gerar APK: ${error.message}`);
-        return reply.status(500).send({ error: 'Falha ao compilar o APK. Verifique se o servidor tem recursos suficientes.' });
+        return reply.status(500).send({ error: 'Falha ao compilar o APK. Verifique se o NDK está instalado corretamente.' });
       }
       
       if (fs.existsSync(apkOutput)) {
