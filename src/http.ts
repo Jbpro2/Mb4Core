@@ -11,7 +11,11 @@ import type { FastifyCookieOptions } from '@fastify/cookie';
 const dashboard = path.resolve(__dirname, '../frontend', 'public');
 const views = path.resolve(__dirname, '../frontend', 'views');
 
-const fastify = Fastify({ ignoreTrailingSlash: true });
+const fastify = Fastify({ 
+  ignoreTrailingSlash: true,
+  connectionTimeout: 600000, // 10 minutos
+  keepAliveTimeout: 600000
+});
 export const eta = new Eta({ views });
 
 import routes from './routes/handle-routes';

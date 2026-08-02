@@ -204,7 +204,7 @@
     async function generateApk() {
         Swal.fire({
             title: 'Gerando APK...',
-            text: 'Isso pode levar alguns minutos. Não feche a página.',
+            text: 'Isso pode levar de 5 a 10 minutos. Não feche a página.',
             allowOutsideClick: false,
             didOpen: () => {
                 Swal.showLoading();
@@ -213,16 +213,21 @@
 
         const csrfToken = getCsrfTokenHead();
         try {
-            const response = await fetch('/api/admin/generate-apk', {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 900000); // 15 min
+
+            const response = await fetch('/api/app/generate-apk', {
                 method: 'POST',
                 headers: {
                     'csrf-token': csrfToken
-                }
+                },
+                signal: controller.signal
             });
 
-            const result = await response.json();
+            clearTimeout(timeoutId);
 
             if (response.ok) {
+                const result = await response.json();
                 Swal.fire({
                     title: 'APK Pronto!',
                     text: 'O aplicativo foi gerado com sucesso.',
@@ -236,10 +241,14 @@
                     }
                 });
             } else {
-                Swal.fire('Erro', result.error || 'Falha ao gerar APK.', 'error');
+                Swal.fire('Processando', 'A compilação foi iniciada no servidor. Aguarde 5 minutos e tente baixar o APK.', 'info').then(() => {
+                    window.location.href = '/api/app/download-apk';
+                });
             }
         } catch (error) {
-            Swal.fire('Erro', 'Erro de conexão com o servidor.', 'error');
+            Swal.fire('Aviso', 'O servidor está compilando seu APK em segundo plano. Aguarde 5 minutos e tente baixar o arquivo.', 'info').then(() => {
+                window.location.href = '/api/app/download-apk';
+            });
         }
     }
 

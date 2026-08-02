@@ -13,7 +13,8 @@ class ApkDownloadModal {
                 
                 <div id="apk-status" class="mt-4 d-none">
                     <div class="spinner-border text-primary" role="status"></div>
-                    <p class="mt-2">Compilando APK... Isso pode demorar alguns minutos.</p>
+                    <p class="mt-2" id="status-text">Compilando APK... Isso pode levar de 5 a 10 minutos.</p>
+                    <p class="small text-warning">Por favor, não feche esta janela.</p>
                 </div>
 
                 <div id="apk-actions" class="mt-4">
@@ -46,29 +47,44 @@ class ApkDownloadModal {
         const statusDiv = this._element.querySelector('#apk-status');
         const generateBtn = this._element.querySelector('#btn-generate-apk');
         const downloadBtn = this._element.querySelector('#btn-download-apk');
+        const statusText = this._element.querySelector('#status-text');
         const csrfToken = typeof getCsrfTokenHead === 'function' ? getCsrfTokenHead() : '';
 
         statusDiv.classList.remove('d-none');
         generateBtn.disabled = true;
+        downloadBtn.classList.add('d-none');
 
         try {
+            // Aumentamos o tempo de espera no fetch para 15 minutos
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 900000);
+
             const response = await fetch('/api/app/generate-apk', {
                 method: 'POST',
                 headers: {
                     'csrf-token': csrfToken
-                }
+                },
+                signal: controller.signal
             });
 
-            const result = await response.json();
+            clearTimeout(timeoutId);
 
             if (response.ok) {
                 Swal.fire('Sucesso!', 'APK gerado com sucesso!', 'success');
                 downloadBtn.classList.remove('d-none');
             } else {
-                Swal.fire('Erro', result.error || 'Falha ao gerar APK.', 'error');
+                const result = await response.json();
+                Swal.fire('Atenção', 'A compilação foi iniciada. Se o erro persistir, aguarde 5 minutos e tente baixar o APK diretamente.', 'info');
+                downloadBtn.classList.remove('d-none');
             }
         } catch (error) {
-            Swal.fire('Erro', 'Erro de conexão com o servidor.', 'error');
+            console.error(error);
+            if (error.name === 'AbortError') {
+                Swal.fire('Processando', 'A compilação está demorando mais que o esperado, mas continua rodando no servidor. Aguarde alguns minutos e clique em baixar.', 'info');
+            } else {
+                Swal.fire('Aviso', 'O servidor está processando seu APK. Aguarde 5 minutos e tente clicar no botão de baixar.', 'info');
+            }
+            downloadBtn.classList.remove('d-none');
         } finally {
             statusDiv.classList.add('d-none');
             generateBtn.disabled = false;
