@@ -15,6 +15,16 @@
         <span>Home</span>
       </a>
     </li>
+    
+    <% if (it.user && it.user.role === 'admin') { %>
+    <li class="nav-item">
+      <a href="/admin" target="_self" class="nav-link text-white <%~ it.active === 'admin' ? 'active' : '' %>">
+        <i class="bi bi-shield-lock"></i>
+        <span>Gerenciar Usuários</span>
+      </a>
+    </li>
+    <% } %>
+
     <li class="nav-item">
       <a href="/cdn" target="_self" class="nav-link text-white <%~ it.active === 'cdn' ? 'active' : '' %>">
         <i class="bi bi-cloud"></i>

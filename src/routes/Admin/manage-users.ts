@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import prisma from '../../config/prisma-client';
 import SafeCallback from '../../utils/safe-callback';
+import Authentication from '../../middlewares/authentication';
 import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
 
 // Middleware local para verificar se é admin
@@ -14,6 +15,7 @@ const isAdmin = async (req: FastifyRequest, reply: FastifyReply) => {
 export const ListUsers: RouteOptions = {
   url: '/api/admin/users',
   method: 'GET',
+  onRequest: [Authentication.user],
   preHandler: [isAdmin],
   handler: async (_req: FastifyRequest, reply: FastifyReply) => {
     const users = await SafeCallback(() =>
@@ -35,6 +37,7 @@ export const ListUsers: RouteOptions = {
 export const DeleteUser: RouteOptions = {
   url: '/api/admin/users/:id',
   method: 'DELETE',
+  onRequest: [Authentication.user],
   preHandler: [isAdmin],
   handler: async (req: FastifyRequest, reply: FastifyReply) => {
     const { id } = req.params as { id: string };
@@ -52,6 +55,7 @@ export const DeleteUser: RouteOptions = {
 export const AddAccessDays: RouteOptions = {
   url: '/api/admin/users/:id/access',
   method: 'POST',
+  onRequest: [Authentication.user],
   preHandler: [isAdmin],
   handler: async (req: FastifyRequest, reply: FastifyReply) => {
     const { id } = req.params as { id: string };

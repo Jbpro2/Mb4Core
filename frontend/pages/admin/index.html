@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <%~ includeFile('../../views/header.eta') %>
+    <title>DTunnelMod - Gerenciar Usuários</title>
+</head>
+<body>
+    <div class="wrapper">
+        <%~ includeFile('../../views/sidebar.eta', it) %>
+        
+        <main class="content">
+            <div class="container-fluid p-0">
+                <div class="mb-3">
+                    <h1 class="h3 d-inline align-middle">Gerenciar Usuários</h1>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card bg-dark text-white shadow">
+                            <div class="card-header bg-dark border-secondary">
+                                <h5 class="card-title mb-0">Lista de Usuários</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Usuário</th>
+                                                <th>E-mail</th>
+                                                <th>Papel</th>
+                                                <th>Expiração</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="user-table-body">
+                                            <!-- Preenchido via JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para adicionar dias -->
+    <div class="modal fade" id="addDaysModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title">Adicionar Dias de Acesso</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="modal-user-id">
+                    <div class="mb-3">
+                        <label for="days-to-add" class="form-label">Quantidade de Dias</label>
+                        <input type="number" class="form-control bg-secondary text-white border-0" id="days-to-add" value="30" min="1">
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmAddDays()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/utils.js"></script>
+    <script>
+        async function loadUsers() {
+            const response = await fetch('/api/admin/users');
+            const users = await response.json();
+            const tbody = document.getElementById('user-table-body');
+            tbody.innerHTML = '';
+
+            users.forEach(user => {
+                const expiry = user.expires_at ? new Date(user.expires_at).toLocaleDateString('pt-BR') : 'Vitalício';
+                const isExpired = user.expires_at && new Date(user.expires_at) < new Date();
+                const expiryClass = isExpired ? 'text-danger' : 'text-success';
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td><span class="badge ${user.role === 'admin' ? 'bg-primary' : 'bg-secondary'}">${user.role}</span></td>
+                    <td class="${expiryClass}">${expiry}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info me-1" onclick="openAddDaysModal('${user.id}')">
+                            <i class="bi bi-calendar-plus"></i> + Dias
+                        </button>
+                        ${user.role !== 'admin' ? `
+                            <button class="btn btn-sm btn-danger" onclick="deleteUser('${user.id}', '${user.username}')">
+                                <i class="bi bi-trash"></i> Remover
+                            </button>
+                        ` : ''}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openAddDaysModal(userId) {
+            document.getElementById('modal-user-id').value = userId;
+            const modal = new bootstrap.Modal(document.getElementById('addDaysModal'));
+            modal.show();
+        }
+
+        async function confirmAddDays() {
+            const userId = document.getElementById('modal-user-id').value;
+            const days = parseInt(document.getElementById('days-to-add').value);
+            const csrfToken = getCsrfTokenHead();
+
+            const response = await fetch(`/api/admin/users/${userId}/access`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'csrf-token': csrfToken
+                },
+                body: JSON.stringify({ days })
+            });
+
+            if (response.ok) {
+                alert('Acesso estendido com sucesso!');
+                location.reload();
+            } else {
+                alert('Erro ao adicionar dias.');
+            }
+        }
+
+        async function deleteUser(userId, username) {
+            if (!confirm(`Tem certeza que deseja remover o usuário ${username}?`)) return;
+            
+            const csrfToken = getCsrfTokenHead();
+            const response = await fetch(`/api/admin/users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'csrf-token': csrfToken
+                }
+            });
+
+            if (response.ok) {
+                alert('Usuário removido!');
+                loadUsers();
+            } else {
+                alert('Erro ao remover usuário.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadUsers);
+    </script>
+</body>
+</html>
