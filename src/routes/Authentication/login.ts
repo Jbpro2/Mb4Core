@@ -7,7 +7,7 @@ import csrfProtection from '../../middlewares/csrf-protection';
 import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
 
 const loginSchema = z.object({
-  email: z.email(),
+  login: z.string().min(3).max(50),
   password: z.string().min(6).max(20),
 });
 
@@ -16,11 +16,17 @@ export default {
   method: 'POST',
   onRequest: [csrfProtection],
   handler: async (req: FastifyRequest, reply: FastifyReply) => {
-    const { email, password } = loginSchema.parse(req.body);
+    const { login, password } = loginSchema.parse(req.body);
 
+    // Tentar encontrar por email ou username
     const user = await SafeCallback(() =>
       prisma.user.findFirst({
-        where: { email },
+        where: {
+          OR: [
+            { email: login },
+            { username: login }
+          ]
+        },
       })
     );
 

@@ -171,22 +171,6 @@
 			transform: scale(1.05);
 		}
 
-		.forgot-password {
-			text-align: right;
-			margin-top: -1rem;
-			margin-bottom: 1.5rem;
-			font-size: 0.9rem;
-		}
-
-		.forgot-password a {
-			color: #ffffff;
-			text-decoration: none;
-		}
-
-		.forgot-password a:hover {
-			text-decoration: underline;
-		}
-
 		.footer {
 			margin-top: 1.5rem;
 			font-size: 0.9rem;
@@ -213,8 +197,8 @@
 		<span class="loader" id="loader-message"></span>
 		<form id="loginForm">
 			<div class="form-group">
-				<i class="bi bi-envelope-fill icon"></i>
-				<input type="email" id="email" name="text" placeholder="Digite seu e-mail" required/>
+				<i class="bi bi-person-fill icon"></i>
+				<input type="text" id="login" name="login" placeholder="Usuário ou E-mail" required/>
 			</div>
 			<div class="form-group">
 				<i class="bi bi-lock-fill icon"></i>
@@ -281,7 +265,7 @@
 
 			let csrfToken = getCsrfTokenHead();
 
-			const email = event.target.email.value;
+			const login = event.target.login.value;
 			const password = event.target.password.value;
 
 			const response = await fetch('/login', {
@@ -291,7 +275,7 @@
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					email,
+					login,
 					password
 				}),
 			});
@@ -299,7 +283,6 @@
 			try {
 				const result = await response.json();
 				if (result?.error) {
-					//console.error(result.error);
 					handleError(result.error);
 					return;
 				}
@@ -313,7 +296,6 @@
 					window.location.href = '/';
 				}, 1000);
 			} catch (error) {
-				//console.error(error);
 				handleError('Ocorreu um erro ao fazer login. Tente novamente.');
 			} finally {
 				hideLoading();
@@ -321,17 +303,7 @@
 		});
 
 		const handleError = (message) => {
-			switch (message.toLowerCase()) {
-				case 'invalid password':
-					showAlert('error', 'E-mail ou senha incorretos');
-					break;
-				case 'user not found':
-					showAlert('error', 'E-mail ou senha incorretos');
-					break;
-				default:
-					showAlert('error', `Ocorreu um erro inesperado: ${message}`);
-					break;
-			}
+			showAlert('error', `Ocorreu um erro: ${message}`);
 		};
 	</script>
 	
