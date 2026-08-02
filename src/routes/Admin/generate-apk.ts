@@ -19,18 +19,22 @@ export const GenerateApk: RouteOptions = {
   handler: async (req: FastifyRequest, reply: FastifyReply) => {
     const projectDir = '/opt/Mb4Core';
     const apkOutput = path.join(projectDir, 'app/build/outputs/apk/debug/app-debug.apk');
+    const finalApk = path.join(projectDir, 'DTunnelMod.apk');
 
-    // Comando para compilar o APK usando o Gradle
-    // Em um cenário real, precisaríamos configurar o local.properties com o caminho do SDK do Android
+    // Garantir permissão de execução
+    exec(`chmod +x ${path.join(projectDir, 'gradlew')}`);
+
+    // Comando para compilar
     const command = `cd ${projectDir} && ./gradlew assembleDebug`;
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error(`Erro ao gerar APK: ${error.message}`);
-        return reply.status(500).send({ error: 'Falha ao compilar o APK. Verifique se o SDK do Android está instalado.' });
+        return reply.status(500).send({ error: 'Falha ao compilar o APK. O servidor pode estar sem recursos ou Java mal configurado.' });
       }
       
       if (fs.existsSync(apkOutput)) {
+        fs.copyFileSync(apkOutput, finalApk);
         reply.send({ message: 'APK gerado com sucesso!', downloadUrl: '/api/admin/download-apk' });
       } else {
         reply.status(500).send({ error: 'APK não encontrado após a compilação.' });
@@ -44,10 +48,10 @@ export const DownloadApk: RouteOptions = {
   method: 'GET',
   onRequest: [Authentication.user],
   handler: async (_req: FastifyRequest, reply: FastifyReply) => {
-    const apkPath = '/opt/Mb4Core/app/build/outputs/apk/debug/app-debug.apk';
+    const finalApk = '/opt/Mb4Core/DTunnelMod.apk';
     
-    if (fs.existsSync(apkPath)) {
-      const fileStream = fs.createReadStream(apkPath);
+    if (fs.existsSync(finalApk)) {
+      const fileStream = fs.createReadStream(finalApk);
       reply.header('Content-Type', 'application/vnd.android.package-archive');
       reply.header('Content-Disposition', 'attachment; filename="DTunnelMod.apk"');
       return reply.send(fileStream);

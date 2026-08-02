@@ -77,9 +77,16 @@ configurar_porta() {
 # Função para Gerar APK
 gerar_apk() {
     echo -e "\n${AMARELO}Iniciando compilação do APK...${RESET}"
-    echo -e "${CIANO}Isso pode demorar alguns minutos na primeira vez.${RESET}"
+    echo -e "${CIANO}Isso pode demorar alguns minutos. Aguarde...${RESET}"
     
     cd "$PROJETO_DIR"
+    
+    # Garantir que o Java está instalado
+    if ! command -v java &> /dev/null; then
+        echo -e "${VERMELHO}Java não encontrado! Instalando...${RESET}"
+        apt update && apt install -y openjdk-17-jdk-headless
+    fi
+
     chmod +x gradlew
     ./gradlew assembleDebug
     
@@ -88,12 +95,12 @@ gerar_apk() {
         if [ -f "$APK_PATH" ]; then
             cp "$APK_PATH" "$PROJETO_DIR/DTunnelMod.apk"
             echo -e "${VERDE}APK gerado com sucesso!${RESET}"
-            echo -e "Local: ${CIANO}/opt/Mb4Core/DTunnelMod.apk${RESET}"
+            echo -e "Arquivo salvo em: ${CIANO}/opt/Mb4Core/DTunnelMod.apk${RESET}"
         else
             echo -e "${VERMELHO}Erro: APK não encontrado após a compilação.${RESET}"
         fi
     else
-        echo -e "${VERMELHO}Erro ao compilar o APK. Verifique se o Java e o SDK do Android estão instalados.${RESET}"
+        echo -e "${VERMELHO}Erro ao compilar o APK. Verifique se o servidor tem memória suficiente.${RESET}"
     fi
     sleep 3
 }
