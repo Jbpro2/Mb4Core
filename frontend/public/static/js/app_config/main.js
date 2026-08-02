@@ -387,6 +387,12 @@ const main = async () => {
     await getConfigApp();
     setListener(appConfigList);
 
+    const apkDownloadModal = new ApkDownloadModal();
+    const btnApkMain = document.querySelector('#btn-apk-main');
+    if (btnApkMain) {
+        btnApkMain.addEventListener('click', () => apkDownloadModal.show());
+    }
+
     pagination.root = document.querySelector('.content');
     pagination.mount();
     pagination.setOnPageChange(() => {
