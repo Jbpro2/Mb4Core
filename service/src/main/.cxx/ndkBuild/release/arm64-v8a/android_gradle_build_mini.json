@@ -1,0 +1,47 @@
+{
+  "buildFiles": [
+    "C:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk",
+    "C:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk"
+  ],
+  "cleanCommands": [
+    "E:\\SDK\\ndk\\21.1.6352462\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\lib clean"
+  ],
+  "buildTargetsCommand": "E:\\SDK\\ndk\\21.1.6352462\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\lib -j12 {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "cpufeatures-release-arm64-v8a": {
+      "artifactName": "cpufeatures",
+      "buildCommand": "E:\\SDK\\ndk\\21.1.6352462\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\lib -j12 C:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libcpufeatures.a",
+      "abi": "arm64-v8a",
+      "output": "C:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\arm64-v8a\\libcpufeatures.a",
+      "runtimeFiles": []
+    },
+    "system-release-arm64-v8a": {
+      "artifactName": "system",
+      "buildCommand": "E:\\SDK\\ndk\\21.1.6352462\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\lib -j12 C:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libsystem.so",
+      "abi": "arm64-v8a",
+      "output": "C:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\arm64-v8a\\libsystem.so",
+      "runtimeFiles": []
+    },
+    "pdnsd-release-arm64-v8a": {
+      "artifactName": "pdnsd",
+      "buildCommand": "E:\\SDK\\ndk\\21.1.6352462\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\lib -j12 C:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libpdnsd.so",
+      "abi": "arm64-v8a",
+      "output": "C:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\arm64-v8a\\libpdnsd.so",
+      "runtimeFiles": []
+    },
+    "tun2socks-release-arm64-v8a": {
+      "artifactName": "tun2socks",
+      "buildCommand": "E:\\SDK\\ndk\\21.1.6352462\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\lib -j12 C:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libtun2socks.so",
+      "abi": "arm64-v8a",
+      "output": "C:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\arm64-v8a\\libtun2socks.so",
+      "runtimeFiles": []
+    },
+    "ancillary-release-arm64-v8a": {
+      "artifactName": "ancillary",
+      "buildCommand": "E:\\SDK\\ndk\\21.1.6352462\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\src\\main\\jni\\Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003dC:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\lib -j12 C:/Users/ponei/Desktop/socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718/app/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libancillary.a",
+      "abi": "arm64-v8a",
+      "output": "C:\\Users\\ponei\\Desktop\\socksDroid-ecb535dca7937a17e5b1800fc0e9ec81f82af718\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\arm64-v8a\\libancillary.a",
+      "runtimeFiles": []
+    }
+  }
+}

@@ -1,0 +1,2 @@
+C:\Users\ponei\Desktop\SCRK\SocksRevive\service\src\main\jni\Android.mk
+C:\Users\ponei\Desktop\SCRK\SocksRevive\service\src\main\jni\Application.mk

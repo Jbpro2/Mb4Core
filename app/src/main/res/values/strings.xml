@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+    <string name="app_name">SocksRevive</string>
+	<string name="state_stopping">Parando</string>
+	<string name="start">Iniciar</string>
+	<string name="stop">Parar</string>
+	<string name="reconnect">Reconectar</string>
+	<string name="about">Sobre</string>
+	<string name="settings_ssh">Configurações SSH</string>
+    <string name="first_start_msg">Este aplicativo foi desenvolvido para usuários avançados, tenha isso em mente ao utilizá-lo.</string>
+	<string name="title_login_main">Detalhes de Login</string>
+	<string name="category_forward_udp">Encaminhamento de UDP</string>
+	<string name="title_forward_udp">Encaminhar UDP</string>
+	<string name="summary_forward_udp">Se ativo, redireciona as requisições para o servidor remoto. Se não, as requisições UDP não serão resolvidas.</string>
+	<string name="title_resolver_udp">UDP Gateway (Remoto)</string>
+	<string name="summary_resolver_udp">Padrão (7300)</string>
+	<string name="category_forward_dns">Encaminhamento de DNS</string>
+	<string name="title_forward_dns">Encaminhar DNS</string>
+	<string name="summary_forward_dns">Se ativo, redireciona as requisições para o servidor remoto. Se não, as requisições DNS serão resolvidas pelo sistema local.</string>
+	<string name="title_dns_primary">DNS Primário</string>
+	<string name="summary_dns_primary">Padrão (1.1.1.1)</string>
+	<string name="dialog_message_dns_primary">Digite o endereço IP do DNS</string>
+	<string name="category_advanced_settings">Configurações Avançadas</string>
+	<string name="title_hide_log">Ocultar Log ao Iniciar</string>
+	<string name="summary_hide_log">Se ativo, o log não será mostrado automaticamente.</string>
+	<string name="title_auto_clear_log">Limpar Logs Automaticamente</string>
+	<string name="summary_auto_clear_log">Se ativo, os logs são limpos automaticamente.</string>
+	<string name="category_forward_port">Encaminhamento de Porta</string>
+	<string name="title_mode_debug">Modo de Depuração</string>
+	<string name="summary_mode_debug">Permite ver informações mais avançadas nos logs.</string>
+	<string name="title_number_max_threads">Número Máximo de Threads</string>
+	<string name="summary_number_max_threads">Quanto maior o número de threads, maior será o consumo de energia e a velocidade da conexão no seu dispositivo.</string>
+	<string name="category_filter_apps">Filtro de Apps - Não Usar QUEBRADO!</string>
+	<string name="title_filter_apps">Filtrar Apps</string>
+	<string name="title_bypass_mode">Modo Bypass</string>
+	<string name="summary_bypass_modo">Se ativo, o tráfego dos aplicativos selecionados será enviado diretamente.</string>
+	<string name="title_apps_list">Lista de Apps</string>
+	<string name="summary_apps_list">Digite um nome de pacote por linha. Veja em Configurações -> Apps para o nome do pacote dos aplicativos.</string>
+	<string name="category_settings_adicionais">Configurações Adicionais</string>
+
+	<string name="title_ping_time">Ping (segundos)</string>
+	<string name="category_user_interface">Interface do Usuário</string>
+	<string name="title_language">Idioma</string>
+    <string name="ssh_server">Servidor</string>
+	<string name="ssh_port">Porta</string>
+	<string name="ssh_porta_local">Porta Local (SOCKS5)</string>
+    <string name="alert_exit">Você tem certeza que deseja sair?</string>
+	<string name="alert_clear_settings">Você tem certeza que deseja restaurar as configurações padrões?</string>
+	<string name="no_value">Nenhum</string>
+	<string name="blocked">Bloqueado</string>
+
+    <string name="show_license">Ver Licenças</string>
+    <string name="minimize">Minimizar</string>
+	<string name="exit">Sair</string>
+	<string name="yes">Sim</string>
+	<string name="no">Não</string>
+    <string name="open">Abrir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="attention">Atenção</string>
+	<string name="ok">OK</string>
+    <string name="open_with">Abrir com</string>
+    <string name="clear_logs">Limpar Logs</string>
+
+    <string name="wizard_details">Detalhes do SocksRevive</string>
+	<string name="wizard_details_msg">SocksRevive é um cliente VPN que funciona através de um servidor SSH. O aplicativo em si é inútil sem uma configuração, sendo assim, apenas para uso de usuários avançados.</string>
+	<string name="payload_details">Palavras-chave</string>
+	<string name="payload_details_msg">Atualmente, as seguintes palavras-chave são suportadas no texto de conexão: [method] [host_port] [ssh] [host] [port] [protocol] [crlf] [cr] [lf] [lfcr] [ua] [random=*;] [rotate=*;] [split] [delay_split]</string>
+	<string name="project_home">Página principal do desenvolvedor: </string>
+	<string name="project_urls">http://t.me/sisudragon</string>
+	<string name="third_party_software">Software de terceiros</string>
+	<string name="jsocks_version">JSocks v1.0.1: https://jsocks.sourceforge.net</string>
+	<string name="trileadssh2_version">Trilead SSH-2 Build 217: https://github.com/jenkinsci/trilead-ssh2</string>
+    <string name="title_agradecimento_especial">Agradecimento especial para</string>
+	<string name="error_userpass_empty">Digite o usuário/senha fornecidos pelo criador da configuração</string>
+	<string name="title_disable_delay_ssh">Desativar atraso TCP</string>
+	<string name="summary_disable_delay_ssh">Se ativado, não haverá atrasos entre as solicitações, o que pode melhorar o ping ou até mesmo a velocidade da conexão.</string>
+	<string name="title_tethering_subnet">Sub-rede de tethering (beta)</string>
+	<string name="summary_tethering_subnet">Habilite se estiver tendo problemas para compartilhar a internet do seu dispositivo.</string>
+
+    <string name="cake" translatable="false">115,111,99,107,115,114,101,118,105,118,101</string>
+    <string name="notimeleft">Sem Tempo Disponivel por favor click no relogio para ver um anuncio</string>
+	<string name="notimeleft2">Sem tempo restante</string>
+	<string name="notimeleft3">Tempo Restante</string>
+	<string name="settings">Opcoes</string>
+    <string name="reloadapp" translatable="false">Recarregar o aplicativo</string>
+	<string name="updateapp" translatable="false">Pronto para atualizar o aplicativo</string>
+    <string name="updateconfig">Atualizar Configs</string>
+    <string name="Dnscompre">Compressão de dados</string>
+	<string name="dnscompres">Comprime os pacotes SSH para ajudar em redes com baixa velocidade</string>
+	<string name="wakelock">Habilitar o Wakelock da CPU para evitar o fechamento do aplicativo quando minimizado</string>
+    <string name="title_number_max2_threads">Maximo de Threads Payload</string>
+	<string name="summary_number_max2_threads">Aviso quanto mais Threads maior o processamento inicial de conexão</string>
+    <string name="proxytext2">1. Conecte outro dispositivo à rede WiFi usando o SSID/Senha.</string>
+	<string name="proxytext3">2. Defina o proxy no dispositivo conectado.</string>
+	<string name="proxy_on">Proxy Online</string>
+	<string name="proxy_off">Proxy Offline</string>
+	<string name="cpvpn">Share VPN</string>
+
+
+</resources>

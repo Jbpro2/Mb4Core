@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    namespace 'com.penguinehis.socksrevive' // Add this line
+
+    compileSdkVersion 36
+    compileOptions {
+    }
+
+    defaultConfig {
+        applicationId 'com.penguinehis.socksrevive'
+		minSdkVersion 26
+        targetSdkVersion 36
+        versionCode 92
+        versionName "Xray Support"
+		multiDexEnabled true
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+}
+
+dependencies {
+    implementation files('libs/libv2ray.aar')
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.play:app-update:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+// Use the latest version
+
+    // outros
+	
+	implementation project(':service')
+    implementation project(':style')
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}

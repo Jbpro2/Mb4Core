@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Cores
+VERDE='\e[32m'
+RESET='\e[0m'
+
+echo -e "${VERDE}Iniciando instalação do DTunnel Mod...${RESET}"
+
+# Atualizar sistema
+apt update -y && apt upgrade -y
+
+# Instalar dependências básicas
+apt install -y curl git zip unzip wget screen
+
+# Instalar Node.js 20
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
+
+# Instalar PM2 globalmente
+npm install -g pm2
+
+# Entrar na pasta do projeto (assumindo que o script é baixado na raiz ou movido)
+cd "$(dirname "$0")"
+
+# Instalar dependências do projeto
+npm install
+
+# Build do projeto
+npm run build
+
+# Configurar atalhos
+echo "alias menuop='bash /home/ubuntu/Mb4Core/menu.sh'" >> ~/.bashrc
+echo "alias pon='pm2 start /home/ubuntu/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
+echo "alias poff='pm2 stop /home/ubuntu/Mb4Core/ecosystem.config.js'" >> ~/.bashrc
+
+# Criar comandos globais
+cat <<EOF > /usr/local/bin/menuop
+#!/bin/bash
+bash /home/ubuntu/Mb4Core/menu.sh
+EOF
+
+cat <<EOF > /usr/local/bin/pon
+#!/bin/bash
+pm2 start /home/ubuntu/Mb4Core/ecosystem.config.js
+EOF
+
+cat <<EOF > /usr/local/bin/poff
+#!/bin/bash
+pm2 stop /home/ubuntu/Mb4Core/ecosystem.config.js
+EOF
+
+chmod +x /usr/local/bin/menuop
+chmod +x /usr/local/bin/pon
+chmod +x /usr/local/bin/poff
+
+# Carregar novos aliases
+source ~/.bashrc
+
+echo -e "${VERDE}Instalação concluída!${RESET}"
+echo -e "Use ${VERDE}menuop${RESET} para abrir o menu."
+echo -e "Use ${VERDE}pon${RESET} para ligar o painel."
+echo -e "Use ${VERDE}poff${RESET} para desligar o painel."

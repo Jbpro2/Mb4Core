@@ -1,0 +1,149 @@
+{
+  "buildFiles": [
+    "C:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+    "C:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "D:\\SDKANDROID\\ndk\\21.4.7075529\\ndk-build.cmd",
+      "NDK_PROJECT_PATH\u003dnull",
+      "APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+      "NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk",
+      "APP_ABI\u003dx86",
+      "NDK_ALL_ABIS\u003dx86",
+      "NDK_DEBUG\u003d1",
+      "APP_PLATFORM\u003dandroid-21",
+      "NDK_OUT\u003dC:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj",
+      "NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\lib",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "D:\\SDKANDROID\\ndk\\21.4.7075529\\ndk-build.cmd",
+    "NDK_PROJECT_PATH\u003dnull",
+    "APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+    "NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk",
+    "APP_ABI\u003dx86",
+    "NDK_ALL_ABIS\u003dx86",
+    "NDK_DEBUG\u003d1",
+    "APP_PLATFORM\u003dandroid-21",
+    "NDK_OUT\u003dC:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj",
+    "NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\lib",
+    "-j12",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "ancillary-debug-x86": {
+      "buildCommandComponents": [
+        "D:\\SDKANDROID\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "APP_PLATFORM\u003dandroid-21",
+        "NDK_OUT\u003dC:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj",
+        "NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\lib",
+        "-j12",
+        "C:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj/local/x86/libancillary.a"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "ancillary",
+      "output": "C:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\x86\\libancillary.a"
+    },
+    "system-debug-x86": {
+      "buildCommandComponents": [
+        "D:\\SDKANDROID\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "APP_PLATFORM\u003dandroid-21",
+        "NDK_OUT\u003dC:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj",
+        "NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\lib",
+        "-j12",
+        "C:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj/local/x86/libsystem.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "system",
+      "output": "C:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\x86\\libsystem.so"
+    },
+    "cpufeatures-debug-x86": {
+      "buildCommandComponents": [
+        "D:\\SDKANDROID\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "APP_PLATFORM\u003dandroid-21",
+        "NDK_OUT\u003dC:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj",
+        "NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\lib",
+        "-j12",
+        "C:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj/local/x86/libcpufeatures.a"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "cpufeatures",
+      "output": "C:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\x86\\libcpufeatures.a"
+    },
+    "pdnsd-debug-x86": {
+      "buildCommandComponents": [
+        "D:\\SDKANDROID\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "APP_PLATFORM\u003dandroid-21",
+        "NDK_OUT\u003dC:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj",
+        "NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\lib",
+        "-j12",
+        "C:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj/local/x86/libpdnsd.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "pdnsd",
+      "output": "C:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\x86\\libpdnsd.so"
+    },
+    "tun2socks-debug-x86": {
+      "buildCommandComponents": [
+        "D:\\SDKANDROID\\ndk\\21.4.7075529\\ndk-build.cmd",
+        "NDK_PROJECT_PATH\u003dnull",
+        "APP_BUILD_SCRIPT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Android.mk",
+        "NDK_APPLICATION_MK\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\src\\main\\jni\\Application.mk",
+        "APP_ABI\u003dx86",
+        "NDK_ALL_ABIS\u003dx86",
+        "NDK_DEBUG\u003d1",
+        "APP_PLATFORM\u003dandroid-21",
+        "NDK_OUT\u003dC:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj",
+        "NDK_LIBS_OUT\u003dC:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\lib",
+        "-j12",
+        "C:/Users/ponei/Desktop/SCRK/SocksRevive/service/build/intermediates/ndkBuild/debug/obj/local/x86/libtun2socks.so"
+      ],
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "tun2socks",
+      "output": "C:\\Users\\ponei\\Desktop\\SCRK\\SocksRevive\\service\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\x86\\libtun2socks.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-x86": {
+      "cCompilerExecutable": "D:\\SDKANDROID\\ndk\\21.4.7075529\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "D:\\SDKANDROID\\ndk\\21.4.7075529\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

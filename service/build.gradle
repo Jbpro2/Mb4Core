@@ -1,0 +1,68 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 36
+    defaultConfig {
+        minSdkVersion 26
+        targetSdkVersion 36
+
+        ndk {
+            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    buildFeatures {
+        aidl true
+    }
+    namespace 'com.penguinehis.ultrasshservice'
+
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
+        }
+    }
+}
+
+dependencies {
+
+    api 'androidx.appcompat:appcompat:1.6.1'
+    //noinspection GradleCompatible
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
+    implementation 'org.conscrypt:conscrypt-android:2.5.3'
+    implementation 'commons-net:commons-net:3.10.0'
+    implementation 'com.google.crypto.tink:tink-android:1.7.0'
+    implementation 'net.i2p.crypto:eddsa:0.2.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api 'org.connectbot.jbcrypt:jbcrypt:1.0.0'
+    api project(':style')
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+// Corrige bug "illegal unicode escape" nos arquivos .java gerados pelo AIDL (Windows)
+tasks.withType(JavaCompile).configureEach {
+    doFirst {
+        def aidlDir = file("${buildDir}/generated/aidl_source_output_dir")
+        if (aidlDir.exists()) {
+            fileTree(aidlDir).matching { include '**/*.java' }.each { f ->
+                def content = f.getText('UTF-8')
+                // Remove linhas de comentário que começam com "* Using:"
+                content = content.replaceAll(/(?m)^\s*\* Using:.*$/, "")
+                f.write(content, 'UTF-8')
+            }
+        }
+    }
+}

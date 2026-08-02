@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">SocksRevive</string>
+
+    <string name="attention">Atenção</string>
+    <string name="cancel">Cancelar</string>
+	<string name="ok">Ok</string>
+	<string name="exit">Sair</string>
+	<string name="error_request_permission">Você necessita de acesso ao Armazenamento Externo</string>
+
+    <string name="log_server_banner">Mensagem do Servidor:</string>
+	<string name="log_conection_lost">Conexão perdida</string>
+
+
+	<string name="start">Iniciar</string>
+	<string name="stop">Parar</string>
+	<string name="reconnect">Reconectar</string>
+	
+	<string name="stopping_service_ssh">Parando Serviço SSH</string>
+	<string name="starting_service_ssh">Iniciando Serviço SSH</string>
+	
+	<string name="title_auth">Autenticação</string>
+    <string name="auth_username">Nome de usuário</string>
+	<string name="password">Senha</string>
+	<string name="show_password">Mostrar senha</string>
+
+
+    <string name="channel_name_background">Connection statistics</string>
+    <string name="channel_description_background">Ongoing statistics of the established SocksRevive connection</string>
+    <string name="channel_name_status">Connection status change</string>
+    <string name="channel_description_status">Status changes of the SocksRevive connection (Connecting, authenticating,…)</string>
+	<string name="channel_name_userreq">User interaction required</string>
+    <string name="channel_description_userreq">SocksRevive connection requires a user input, e.g. two factor authentification</string>
+
+	<string name="state_starting">Iniciando</string>
+	<string name="state_connecting">Conectando</string>
+    <string name="state_auth">Autenticando</string>
+	<string name="state_auth_success">Autenticado</string>
+	<string name="state_get_config">Obtendo configuração do cliente</string>
+	<string name="state_assign_ip">Atribuindo endereços IP</string>
+	<string name="state_add_routes">Adicionando rotas</string>
+	<string name="state_connected">Conectado</string>
+	<string name="state_disconnected">Desconectado</string>
+	<string name="state_reconnecting">Reconectando</string>
+	<string name="state_stopping">Parando</string>
+	<string name="state_noprocess">Não em execução</string>
+	<string name="state_resolve">Resolvendo nomes de host</string>
+	<string name="state_tcp_connect">Conectando (TCP)</string>
+    <string name="state_nonetwork">Aguardando rede</string>
+	<string name="state_waitconnectretry">Aguardando %ss segundos entre tentativas de conexão</string>
+	<string name="state_auth_pending">Aguardando autenticação</string>
+	<string name="state_user_vpn_password">Aguardando senha do usuário para VPN</string>
+	<string name="state_user_vpn_permission">Aguardando permissão do usuário para usar a API VPN</string>
+	<string name="state_user_vpn_password_cancelled">Diálogo de senha da VPN cancelado</string>
+	<string name="state_user_vpn_permission_cancelled">Diálogo de permissão da API VPN cancelado</string>
+	<string name="unknown_state">Estado desconhecido</string>
+	<string name="nought_alwayson_warning"><![CDATA[Se você não recebeu um diálogo de confirmação VPN, você ativou o "Sempre na VPN" para outro aplicativo. Nesse caso, apenas esse aplicativo poderá se conectar a uma VPN. Verifique em Configurações -> Redes -> VPNs]]></string>
+	<string name="no_vpn_support_image">Sua imagem não suporta a API VPNService, desculpe :(</string>
+    <string name="state_proxy_inject">Injetando</string>
+
+    <string name="app_mobile_info">Versão do Aplicativo: %1$s %2$s</string>
+
+	<string name="alert_update_app">Instale a versão mais recente</string>
+	<string name="error_settings_expired">Arquivo expirado</string>
+	<string name="error_file_settings_invalid">Configuração inválida</string>
+	<string name="error_file_invalid">Arquivo inválido ou HWID incompatível ou versão antiga</string>
+	<string name="error_internet_off">Por favor, conecte-se à internet</string>
+	<string name="error_empty_payload">A payload não pode ficar vazia</string>
+	<string name="error_empty_settings">Configure corretamente para iniciar</string>
+	<string name="error_proxy_invalid">Proxy inválido</string>
+	<string name="error_server_ip_invalid">Servidor/IP inválido</string>
+	<string name="error_root_detected">Configuração bloqueada para dispositivos com acesso root</string>
+	<string name="error_vpn_sniffer_detected">Outro aplicativo VPN em execução foi detectado, pare-o antes</string>
+	<string name="error_save_settings">Não foi possível salvar configuração</string>
+    <string name="cake" translatable="false">115,111,99,107,115,114,101,118,105,118,101</string>
+
+    <string name="authfailed">Falha na autenticação</string>
+	<string name="conectssh">Conexão SSH estabelecida</string>
+	<string name="stpssh">Parando SSH</string>
+	<string name="debgon">Modo de depuração ativado</string>
+	<string name="compressg">Compactação SSH habilitada</string>
+	<string name="pubauth">Autenticado com chave pública</string>
+	<string name="checkinglogin">Verificando usuário/senha...</string>
+	<string name="failedlogin">Dados de login incorretos</string>
+	<string name="contactowner">Entre em contato com o proprietário do servidor para mais informações</string>
+	<string name="dataerror">Não foi possível autenticar com os dados fornecidos</string>
+	<string name="reconecti">Reconectando...</string>
+	<string name="wnetwork">Aguardando rede...</string>
+	<string name="failedvpn">Falha ao iniciar o serviço de túnel VPN</string>
+	<string name="semsenha">Voce não digitou um usuario e senha</string>
+
+</resources>

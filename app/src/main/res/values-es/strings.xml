@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="MissingTranslation">
+	
+    <string name="app_name">SocksRevive</string>
+
+	<string name="reconnect">Reconectar</string>
+	<string name="about">Sobre</string>
+	<string name="settings">Configuraciones</string>
+	<string name="settings_ssh">Configuraciones SSH</string>
+	<string name="first_start_msg">Esta aplicación fue desarrollada para usuarios avanzados, tenga esto en cuenta al usarla.</string>
+	<string name="title_login_main">Detalles de Login</string>
+	
+	<!-- Preference -->
+	<string name="category_forward_udp">Redireccionamiento de Udp</string>
+	<string name="title_forward_udp">Redireccionar UDP</string>
+	<string name="summary_forward_udp">Se activo redirecionamiento para el servidor remoto. Si no, UDP no funcionara.</string>
+	<string name="title_resolver_udp">Udp Gateway (remoto)</string>
+	<string name="summary_resolver_udp">Default (7300)</string>
+	<string name="category_forward_dns">Redireccionamiento de Dns</string>
+	<string name="title_forward_dns">Redireccionar DNS</string>
+	<string name="summary_forward_dns">Si activo, redireciona as requisições para o servidor remoto. Si no, seran utilizadas las DNS por el sistema local.</string>
+	<string name="title_dns_primary">Dns Primario</string>
+	<string name="summary_dns_primary">Default (1.1.1.1)</string>
+	<string name="dialog_message_dns_primary">Escriba la IP de DNS</string>
+	<string name="category_advanced_settings">Configuraciones Avanzadas</string>
+	<string name="title_hide_log">Ocultar Registro al Iniciar</string>
+	<string name="summary_hide_log">Si activo el log no será mostrado automaticamente.</string>
+	<string name="title_auto_clear_log">Limpiar Registros Automáticamente</string>
+	<string name="summary_auto_clear_log">Si activo los Registros se borraran automáticamente.</string>
+	<string name="category_forward_port">Redirecionamiento de Puerto</string>
+	<string name="title_mode_debug">Modo de depuración</string>
+	<string name="summary_mode_debug">Permite ver informaciones más avanzadas de los Registros.</string>
+	<string name="title_number_max_threads">Número máximo de Threads</string>
+	<string name="summary_number_max_threads">Cuanto mayor sea el número de Threads mayor será el consumo de energia y la velocidad de conexión en su dispositivo.</string>
+	<string name="category_filter_apps">Filtro de aplicaciones - ¡No utilizar, está roto!</string>
+	<string name="title_filter_apps">Filtrar apps</string>
+	<string name="title_bypass_mode">Bypass Mode</string>
+	<string name="summary_bypass_modo">Si activo, o tráfico de las aplicaticiones selecionadas sera enviada directamente.</string>
+	<string name="title_apps_list">Lista de Apps</string>
+	<string name="summary_apps_list">Escriba un nombre de paquete por línea. Vea en Configuraciones -> Apps para el nombre de paquete de apps.</string>
+	<string name="category_settings_adicionais">Configuraciones adicionales</string>
+	<string name="title_ping_time">Ping (segundos)</string>
+	<string name="category_user_interface">Interface de Usuario</string>
+	<string name="title_language">Idioma</string>
+
+	<string name="ssh_server">Servidor</string>
+	<string name="ssh_port">Puerta</string>
+	<string name="ssh_porta_local">Puerto local (Socks5)</string>
+
+	<string name ="alert_exit">Esta seguro/a que desea salir?</string>
+	<string name="alert_clear_settings">Está seguro/a de restaurar las configuraciones predeterminadas?</string>
+	<string name="no_value">Vacío</string>
+	<string name="blocked">Bloqueado</string>
+	<string name="show_license">Ver Licencias</string>
+	
+	<!--- export settings -->
+
+	<!--- action messages -->
+	<string name="minimize">Minimizar</string>
+	<string name="exit">Salir</string>
+	<string name="yes">Si</string>
+	<string name="no">No</string>
+	<string name="open">Abrir</string>
+	<string name="cancel">Cancelar</string>
+	<string name="attention">Atención</string>
+	<string name="ok">Ok</string>
+	<string name="open_with">Abrir con</string>
+	<string name="clear_logs">Limpiar Registros</string>
+
+	<!--Welcome Wizard strings (DJH)-->
+	<string name="wizard_details">Algunos detalles de SocksRevive</string>
+	<string name="wizard_details_msg">SocksRevive es un cliente de VPN que funciona a través de un servidor SSH. La aplicación en sí es inútil sin una configuración, por lo que solo es para uso de usuarios avanzados.</string>
+	<string name="payload_details">Palabras clave</string>
+	<string name="payload_details_msg">Actualmente se admiten las siguientes palabras clave en el texto de conexión: [method] [host_port] [ssh] [host] [port] [protocol] [crlf] [cr] [lf] [lfcr] [ua] [random=;] [rotate=;] [split] [delay_split]</string>
+	<string name="project_home">Página principal del desarrollador:</string>
+	<string name="project_urls">http://t.me/sisudragon</string>
+	<string name="third_party_software">Software de terceros</string>
+	<string name="jsocks_version">JSocks v1.0.1: https://jsocks.sourceforge.net</string>
+	<string name="trileadssh2_version">Trilead SSH-2 Build 217: https://github.com/jenkinsci/trilead-ssh2</string>
+	
+	<!--- error messages -->
+
+	<!-- Ainda Falta Traduzir -->
+	<string name="title_agradecimento_especial">Agradecimientos especiales a</string>
+	<string name="error_userpass_empty">Ingrese el usuario/contraseña proporcionado por el creador de la configuración</string>
+	<string name="title_disable_delay_ssh">Desactivar Retardo TCP</string>
+	<string name="summary_disable_delay_ssh">Si se activa, no habrá demoras entre solicitudes, lo que puede mejorar el ping o incluso la velocidad de conexión.</string>
+	<string name="title_tethering_subnet">Subred de Tethering (beta)</string>
+	<string name="summary_tethering_subnet">Habilitar si tiene problemas para compartir Internet desde su dispositivo.</string>
+	<string name="notimeleft">Sem Tempo Disponivel por favor click no relogio para ver um anuncio</string>
+	<string name="notimeleft2">Sem tempo restante</string>
+	<string name="notimeleft3">Tempo Restante</string>
+    <string name="state_stopping">Parando</string>
+	<string name="start">Iniciar</string>
+	<string name="stop">Parar</string>
+    <string name="updateconfig">Atualizar Configs</string>
+</resources>
