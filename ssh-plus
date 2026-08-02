@@ -100,13 +100,14 @@ chmod +x /usr/local/bin/menuop
 chmod +x /usr/local/bin/pon
 chmod +x /usr/local/bin/poff
 
-# Iniciar o painel pela primeira vez
+# Iniciar o painel
 cd /opt/Mb4Core && pm2 start ecosystem.config.js
 
 echo -e "${VERDE}Instalação concluída com sucesso!${RESET}"
 echo -e "Acesse pelo seu IP na porta 3000 (ou na que você configurar no menuop)"
 echo -e "Admin padrão: ${VERDE}Bk2026@12${RESET}"
 echo -e "Senha padrão: ${VERDE}2012@bk2520${RESET}"
+echo -e "Papel: ${VERDE}ADMINISTRADOR TOTAL${RESET}"
 echo ""
 echo -e "Use os comandos abaixo:"
 echo -e "- ${VERDE}menuop${RESET} : Abre o menu"

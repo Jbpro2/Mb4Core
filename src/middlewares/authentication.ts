@@ -11,11 +11,16 @@ interface IJwtPayload {
 }
 
 export default class Authentication {
-  private static redirect(req: FastifyRequest, reply: FastifyReply) {
+  private static redirect(req: FastifyRequest, reply: FastifyReply, message?: string) {
     CookieManager.deleteCookiesLoggedIn(reply);
     const routesNotAuthorized = ['/login', '/register'];
     const route = routesNotAuthorized.find((route) => route === req.routeOptions.config.url);
     if (!route) {
+      // Se for uma chamada de API, retornar erro JSON em vez de redirect
+      if (req.url.startsWith('/api/')) {
+        reply.status(401).send({ error: message || 'Não autorizado' });
+        throw new Error(message || 'Unauthorized');
+      }
       reply.redirect('/login');
     }
   }
@@ -41,9 +46,20 @@ export default class Authentication {
     if ((verifyAccessToken as IJwtPayload).id) {
       const id = (verifyAccessToken as IJwtPayload).id;
       const user = await SafeCallback(() => prisma.user.findUnique({ where: { id } }));
+      
       if (!user) {
         return Authentication.redirect(req, reply);
       }
+
+      // Verificar expiração (exceto para admin)
+      if (user.role !== 'admin' && user.expires_at) {
+        const now = new Date();
+        const expiry = new Date(user.expires_at);
+        if (now > expiry) {
+          return Authentication.redirect(req, reply, 'Sua conta expirou. Entre em contato com o administrador.');
+        }
+      }
+
       req.user = user;
     }
   }

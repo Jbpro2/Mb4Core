@@ -2,7 +2,6 @@ import sqlite3
 import bcrypt
 import uuid
 import os
-import sys
 
 # Tentar encontrar o banco de dados no local padrão ou no local atual
 db_path = '/opt/Mb4Core/prisma/database.db'
@@ -22,13 +21,15 @@ hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(10)).de
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
-# Garantir que a tabela existe (mesmo que o prisma já tenha rodado)
+# Garantir que a tabela existe com as novas colunas
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS users (
     id TEXT PRIMARY KEY,
     username TEXT UNIQUE,
     password TEXT,
     email TEXT UNIQUE,
+    role TEXT DEFAULT 'user',
+    expires_at DATETIME,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     app_text_version INTEGER DEFAULT 1,
@@ -37,22 +38,31 @@ CREATE TABLE IF NOT EXISTS users (
 )
 ''')
 
+# Tentar adicionar colunas caso a tabela já exista sem elas
+try:
+    cursor.execute('ALTER TABLE users ADD COLUMN role TEXT DEFAULT "user"')
+except:
+    pass
+try:
+    cursor.execute('ALTER TABLE users ADD COLUMN expires_at DATETIME')
+except:
+    pass
+
 # Inserir ou atualizar admin
 try:
     user_id = str(uuid.uuid4())
-    # Verificar se o usuário já existe pelo username
     cursor.execute('SELECT id FROM users WHERE username = ?', (username,))
     row = cursor.fetchone()
     
     if row:
-        cursor.execute('UPDATE users SET password = ?, email = ? WHERE username = ?', (hashed_password, email, username))
-        print(f"Usuário {username} atualizado com sucesso!")
+        cursor.execute('UPDATE users SET password = ?, email = ?, role = ? WHERE username = ?', (hashed_password, email, 'admin', username))
+        print(f"Usuário {username} atualizado como ADMIN com sucesso!")
     else:
         cursor.execute('''
-        INSERT INTO users (id, username, password, email)
-        VALUES (?, ?, ?, ?)
-        ''', (user_id, username, hashed_password, email))
-        print(f"Usuário {username} criado com sucesso!")
+        INSERT INTO users (id, username, password, email, role)
+        VALUES (?, ?, ?, ?, ?)
+        ''', (user_id, username, hashed_password, email, 'admin'))
+        print(f"Usuário {username} criado como ADMIN com sucesso!")
         
     conn.commit()
 except Exception as e:

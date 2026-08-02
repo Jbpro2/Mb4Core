@@ -12,6 +12,8 @@ model User {
   username           String   @unique
   password           String
   email              String   @unique
+  role               String   @default("user")
+  expires_at         DateTime?
   created_at         DateTime @default(now())
   updated_at         DateTime @updatedAt
   app_text_version   Int      @default(1)

@@ -9,8 +9,15 @@ export default function handler(fastify: FastifyInstance, _: any, done: () => vo
 
   routes.forEach((file) => {
     try {
-      const route: RouteOptions = require(file).default;
-      if (route && route.url) fastify.route(route);
+      const exported = require(file).default;
+      if (Array.isArray(exported)) {
+        exported.forEach((route: RouteOptions) => {
+          if (route && route.url) fastify.route(route);
+        });
+      } else {
+        const route: RouteOptions = exported;
+        if (route && route.url) fastify.route(route);
+      }
     } catch (err) {
       console.log(err);
     }
