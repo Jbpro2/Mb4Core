@@ -255,6 +255,7 @@ const createInputApp = (config) => {
 let listenerStatus = 0;
 
 const setListener = (appConfigList) => {
+    const root = document.querySelector('.row');
 
     if (listenerStatus != 0) return;
     
@@ -277,7 +278,7 @@ const setListener = (appConfigList) => {
     const apkDownloadModal = new ApkDownloadModal();
     cardDefault.setOnBtnApkDownloadClick(() => apkDownloadModal.show());
 
-    //root.appendChild(cardDefault.element);
+    root.appendChild(cardDefault.element);
 
     listenerStatus++;
 }
@@ -384,6 +385,7 @@ const main = async () => {
     }
 
     await getConfigApp();
+    setListener(appConfigList);
 
     pagination.root = document.querySelector('.content');
     pagination.mount();

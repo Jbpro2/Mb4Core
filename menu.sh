@@ -12,6 +12,10 @@ PROJETO_DIR="/opt/Mb4Core"
 ENV_FILE="$PROJETO_DIR/.env"
 DB_FILE="$PROJETO_DIR/prisma/database.db"
 
+# Exportar variáveis do Android SDK
+export ANDROID_HOME=/opt/android-sdk
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+
 # Função para ler a porta atual
 get_port() {
     if [ -f "$ENV_FILE" ]; then
@@ -81,13 +85,10 @@ gerar_apk() {
     
     cd "$PROJETO_DIR"
     
-    # Configurar variáveis de ambiente para o Gradle
-    export ANDROID_HOME=/opt/android-sdk
-    export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
-    
     if [ ! -d "/opt/android-sdk" ]; then
-        echo -e "${VERMELHO}Android SDK não encontrado! Rodando instalador de dependências...${RESET}"
-        bash /opt/Mb4Core/ssh-plus
+        echo -e "${VERMELHO}Android SDK não encontrado! Reinstale usando o ssh-plus.${RESET}"
+        sleep 3
+        return
     fi
 
     chmod +x gradlew

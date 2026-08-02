@@ -38,7 +38,7 @@ if ! command -v pm2 &> /dev/null; then
 fi
 
 # --- INSTALAÇÃO DO ANDROID SDK PARA GERAR APK ---
-echo -e "${VERDE}Configurando Android SDK para geração de APK...${RESET}"
+echo -e "${VERDE}Configurando Android SDK para geração de APK (SDK 36)...${RESET}"
 mkdir -p /opt/android-sdk/cmdline-tools
 cd /opt/android-sdk/cmdline-tools
 if [ ! -d "latest" ]; then
@@ -51,8 +51,9 @@ fi
 export ANDROID_HOME=/opt/android-sdk
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
 
-# Aceitar licenças
-yes | /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+# Aceitar licenças e instalar plataformas necessárias (incluindo 36)
+echo -e "${CIANO}Instalando plataformas Android... isso pode demorar.${RESET}"
+yes | /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-33" "platforms;android-34" "platforms;android-35" "platforms;android-36" "build-tools;33.0.2" "build-tools;34.0.0" "build-tools;35.0.0"
 
 # Criar local.properties no projeto
 mkdir -p /opt/Mb4Core
