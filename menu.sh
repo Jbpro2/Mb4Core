@@ -61,19 +61,9 @@ configurar_porta() {
     read nova_porta
     if [[ "$nova_porta" =~ ^[0-9]+$ ]]; then
         if [ -f "$ENV_FILE" ]; then
-            # Usar sed para substituir apenas o valor de PORT, mantendo o resto do arquivo
-            if grep -q "^PORT=" "$ENV_FILE"; then
-                sed -i "s/^PORT=.*/PORT=$nova_porta/" "$ENV_FILE"
-            else
-                echo "PORT=$nova_porta" >> "$ENV_FILE"
-            fi
+            sed -i "s/^PORT=.*/PORT=$nova_porta/" "$ENV_FILE"
         else
             echo "PORT=$nova_porta" > "$ENV_FILE"
-            echo "NODE_ENV=\"production\"" >> "$ENV_FILE"
-            echo "DATABASE_URL=\"file:./database.db\"" >> "$ENV_FILE"
-            echo "CSRF_SECRET=\"$(openssl rand -hex 32)\"" >> "$ENV_FILE"
-            echo "JWT_SECRET_KEY=\"$(openssl rand -hex 32)\"" >> "$ENV_FILE"
-            echo "JWT_SECRET_REFRESH=\"$(openssl rand -hex 32)\"" >> "$ENV_FILE"
         fi
         echo -e "${VERDE}Porta alterada para $nova_porta.${RESET}"
         echo -e "${AMARELO}Reiniciando o painel para aplicar a alteração...${RESET}"
@@ -82,6 +72,30 @@ configurar_porta() {
         echo -e "${VERMELHO}Porta inválida!${RESET}"
         sleep 2
     fi
+}
+
+# Função para Gerar APK
+gerar_apk() {
+    echo -e "\n${AMARELO}Iniciando compilação do APK...${RESET}"
+    echo -e "${CIANO}Isso pode demorar alguns minutos na primeira vez.${RESET}"
+    
+    cd "$PROJETO_DIR"
+    chmod +x gradlew
+    ./gradlew assembleDebug
+    
+    if [ $? -eq 0 ]; then
+        APK_PATH="$PROJETO_DIR/app/build/outputs/apk/debug/app-debug.apk"
+        if [ -f "$APK_PATH" ]; then
+            cp "$APK_PATH" "$PROJETO_DIR/DTunnelMod.apk"
+            echo -e "${VERDE}APK gerado com sucesso!${RESET}"
+            echo -e "Local: ${CIANO}/opt/Mb4Core/DTunnelMod.apk${RESET}"
+        else
+            echo -e "${VERMELHO}Erro: APK não encontrado após a compilação.${RESET}"
+        fi
+    else
+        echo -e "${VERMELHO}Erro ao compilar o APK. Verifique se o Java e o SDK do Android estão instalados.${RESET}"
+    fi
+    sleep 3
 }
 
 # Menu Principal
@@ -101,7 +115,7 @@ while true; do
     echo -e "${CIANO}3.${RESET} Reiniciar painel"
     echo -e "${CIANO}4.${RESET} Ativar Auto backup ${AMARELO}(Em breve)${RESET}"
     echo -e "${CIANO}5.${RESET} Remover painel"
-    echo -e "${CIANO}6.${RESET} Gerar Aplicativo (APK) ${AMARELO}(Em breve)${RESET}"
+    echo -e "${CIANO}6.${RESET} Gerar Aplicativo (APK)"
     echo -e "${CIANO}7.${RESET} Configurar porta do painel ${AMARELO}(Atual: $PORTA_ATUAL)${RESET}"
     echo -e "${CIANO}0.${RESET} Sair"
     echo ""
@@ -114,7 +128,7 @@ while true; do
         3) reiniciar_painel ;;
         4) echo -e "\nFuncionalidade em desenvolvimento..."; sleep 2 ;;
         5) pm2 delete DTunnel; echo -e "${VERMELHO}Painel removido!${RESET}"; sleep 2 ;;
-        6) echo -e "\nFuncionalidade em desenvolvimento..."; sleep 2 ;;
+        6) gerar_apk ;;
         7) configurar_porta ;;
         0) exit 0 ;;
         *) echo -e "\nOpção inválida!"; sleep 1 ;;

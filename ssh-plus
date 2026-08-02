@@ -16,8 +16,9 @@ fi
 # Atualizar sistema
 apt update -y && apt upgrade -y
 
-# Instalar dependências básicas
-apt install -y curl git zip unzip wget screen build-essential libcap2-bin python3 python3-pip python3-bcrypt
+# Instalar dependências básicas e Java para o APK
+echo -e "${VERDE}Instalando dependências do sistema e Java...${RESET}"
+apt install -y curl git zip unzip wget screen build-essential libcap2-bin python3 python3-pip python3-bcrypt openjdk-17-jdk-headless
 
 # Instalar Node.js 20
 if ! command -v node &> /dev/null; then
@@ -44,6 +45,9 @@ git clone https://github.com/Jbpro2/Mb4Core.git /opt/Mb4Core
 
 # Entrar na pasta do projeto
 cd /opt/Mb4Core
+
+# Configurar permissão do gradlew para o APK
+chmod +x gradlew
 
 # Criar arquivo .env
 echo -e "${VERDE}Gerando chaves de segurança...${RESET}"
@@ -104,10 +108,9 @@ chmod +x /usr/local/bin/poff
 cd /opt/Mb4Core && pm2 start ecosystem.config.js
 
 echo -e "${VERDE}Instalação concluída com sucesso!${RESET}"
-echo -e "Acesse pelo seu IP na porta 3000 (ou na que você configurar no menuop)"
-echo -e "Admin padrão: ${VERDE}Bk2026@12${RESET}"
-echo -e "Senha padrão: ${VERDE}2012@bk2520${RESET}"
-echo -e "Papel: ${VERDE}ADMINISTRADOR TOTAL${RESET}"
+echo -e "Acesse pelo seu IP na porta 3000"
+echo -e "Admin padrão: ${VERDE}Bk2026@12${RESET} / Senha: ${VERDE}2012@bk2520${RESET}"
+echo -e "Opção 6 do menu habilitada para gerar o APK."
 echo ""
 echo -e "Use os comandos abaixo:"
 echo -e "- ${VERDE}menuop${RESET} : Abre o menu"
